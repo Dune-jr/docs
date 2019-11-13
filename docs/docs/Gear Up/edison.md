@@ -149,6 +149,28 @@ An 8 GB SD card should provide plenty of space for the linux operating system, O
 #### Optional - case for the bonnet
 There is one 3D printable case [available on thingiverse](https://www.thingiverse.com/thing:3656500), where Raspberry Pi Zero fits with the bonnet. 
 
+****
+
+## Hardware information for Pi-based setups with rewired TI-stick
+
+This hardware setup is **not recommended unless you already have a USB TI stick** and want to continue using it with 0.7.0. This part of the documentation is a work-in-progress and as of 11/9/2019 not fully tested -- if you can help with this, we would appreciate it very much!
+
+You will need a CC-Debugger to re-flash your TI stick with an SPI-compatible firmware, [located here](https://github.com/ps2/subg_rfspy/releases). Any of the v0.8 `spi1_alt2` versions should work.
+
+You will also need jumpers to wire your TI stick to the Raspberry Pi's GPIO header in the following configuration:
+```
+SPI0 CS0 (Pi pin 24) -> debug  pin 5
+SPI0 CLK (Pi pin  23) -> debug pin 6
+SPI0 MISO (Pi pin 21) -> debug pin 8
+SPI0 MOSI (Pi pin 19) -> debug pin 10
+any Pi 3.3V pin -> debug pin 2
+any Pi ground pin -> debug pin 1
+GPIO 4 (Pi pin 7) -> debug pin 7
+```
+
+When prompted in oref0-setup.sh, you will need to select the "TI Stick (SPI-connected)" option.
+ 
+
 ***
 
 ## Hardware information for Intel Edison-based setups
@@ -193,27 +215,6 @@ You can also use any charger with a USB plug, including a wall power charger. Th
 
 You should monitor the rig periodically - **especially the LiPo battery**, checking for swelling or damage. Immediately discontinue use of any battery that shows sign of swelling or damage.
 
-****
-
-## Hardware information for Pi-based setups with rewired TI-stick
-
-This hardware setup is **not recommended unless you already have a USB TI stick** and want to continue using it with 0.7.0. This part of the documentation is a work-in-progress and as of 11/9/2019 not fully tested -- if you can help with this, we would appreciate it very much!
-
-You will need a CC-Debugger to re-flash your TI stick with an SPI-compatible firmware, [located here](https://github.com/ps2/subg_rfspy/releases). Any of the v0.8 `spi1_alt2` versions should work.
-
-You will also need jumpers to wire your TI stick to the Raspberry Pi's GPIO header in the following configuration:
-```
-SPI0 CS0 (Pi pin 24) -> debug  pin 5
-SPI0 CLK (Pi pin  23) -> debug pin 6
-SPI0 MISO (Pi pin 21) -> debug pin 8
-SPI0 MOSI (Pi pin 19) -> debug pin 10
-any Pi 3.3V pin -> debug pin 2
-any Pi ground pin -> debug pin 1
-GPIO 4 (Pi pin 7) -> debug pin 7
-```
-
-When prompted in oref0-setup.sh, you will need to select the "TI Stick (SPI-connected)" option.
- 
 ### Radio stick (only if not using Explorer board)
 
 We recommend an Explorer Board with a built-in radio ([see above](http://openaps.readthedocs.io/en/latest/docs/Gear%20Up/edison.html#explorer-block)), because if you get an Explorer Board, you don't need an additional radio stick or CC-Debugger. 
